@@ -16,30 +16,30 @@ const Home = () => {
           <button className="px-8 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-lg hover:bg-blue-700 mb-10">
             Get Started →
           </button>
-          </div>
+        </div>
           <div className="flex flex-wrap justify-center p-10 gap-6">
-        <div className="bg-red-200 p-6 rounded-lg w-70 text-center">
-          <p className="text-gray-600 mt-2">
+        <div className="bg-red-200 p-8 rounded-lg w-64 text-center">
+          <p className="text-gray-600 text-xl text-bold mt-2">
           Unlock a world of opportunities to shape your career journey
           </p>
         </div>
         <div className="bg-gray-200 p-6 rounded-lg w-64 text-center">
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-xl text-bold justify-center text-center flex items-center mt-2">
           Effortless Application Creation
           </p>
         </div>
         <div className="bg-blue-200 p-6 rounded-lg w-64 text-center">
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-xl text-bold mt-2">
           Become the standout candidate to potential employers         
           </p>
         </div>
         <div className="bg-teal-200 p-6 rounded-lg w-64 text-center">
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-xl text-bold mt-2">
           Confidence strengthened by Personal Branding
           </p>
         </div>
         <div className="bg-purple-200 p-6 rounded-lg w-64 text-center">
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 text-xl text-bold text-center mt-2">
           Streamlined application creation, freeing up more time for your preparation
           </p>
         </div>
@@ -67,7 +67,8 @@ const Home = () => {
         </div>
       </div>
       </div>
-        </main>
+      
+    </main>
         </>
     )
 }
