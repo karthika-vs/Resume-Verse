@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 tailwind.config = {
+    content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
     darkMode: 'class',
     theme: {
         extend: {
@@ -44,5 +45,6 @@ tailwind.config = {
                 'Noto Color Emoji'
             ]
         }
-    }
+    },
+    plugins: [],
 }
