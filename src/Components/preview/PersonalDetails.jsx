@@ -3,6 +3,7 @@ import React from "react";
 const PersonalDetails = ({ resumeData }) => {
   return (
     <div className="max-w-4xl w-full mx-auto p-8 bg-white shadow-lg rounded-lg">
+      {/* Header Section */}
       <header className="text-center">
         <h1 className="text-3xl font-bold">
           {resumeData.firstName} {resumeData.lastName}
@@ -17,7 +18,7 @@ const PersonalDetails = ({ resumeData }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            LinkedIn
+            {resumeData.linkedin}
           </a>
           <a
             href={resumeData.github}
@@ -25,7 +26,7 @@ const PersonalDetails = ({ resumeData }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub
+            {resumeData.github}
           </a>
         </div>
       </header>
@@ -39,6 +40,20 @@ const PersonalDetails = ({ resumeData }) => {
             <p>
               {edu.degree} | {edu.percentage}% | {edu.duration}
             </p>
+          </div>
+        ))}
+      </section>
+
+      {/* Work Experience Section */}
+      <section className="mt-6">
+        <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
+        {resumeData.workExperience.map((exp, index) => (
+          <div key={index} className="mt-2">
+            <p className="font-semibold">{exp.companyName}</p>
+            <p>
+              {exp.role} | Duration: {exp.duration}
+            </p>
+            <p className="text-gray-600">{exp.desc}</p>
           </div>
         ))}
       </section>

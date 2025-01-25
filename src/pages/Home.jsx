@@ -69,7 +69,7 @@ const Home = () => {
                         </div>
                         <div className="text-gray-600 text-xl md:w-2/3">
                             <p>
-                                FlowCV is more than just a resume builder — it's a revolutionary
+                                ResumeVerse is more than just a resume builder — it's a revolutionary
                                 platform designed to elevate your job search experience. Our focus
                                 is on empowering job seekers like you to present their full
                                 potential and secure their dream roles, all while saving time and
@@ -78,7 +78,7 @@ const Home = () => {
                             <p className="mt-4">
                                 Design a seamless visual journey across your application and
                                 visual appearance that reflects your unique identity, making each
-                                aspect of your application uniquely yours. With FlowCV, you can
+                                aspect of your application uniquely yours. With ResumeVerse, you can
                                 present yourself confidently and professionally, leaving a
                                 memorable impression on potential employers. Start building your
                                 distinctive brand today!
