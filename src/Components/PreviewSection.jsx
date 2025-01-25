@@ -1,28 +1,38 @@
-import React from 'react'
-import { useContext } from 'react';
-import { ResumeInfoContext } from '../context/ResumeInfoContext';
+import React, { useContext } from "react";
+import { ResumeInfoContext } from "../context/ResumeInfoContext";
 
-import PersonalDetails from './preview/PersonalDetails';
+import PersonalDetails from "./preview/PersonalDetails";
+import EducationDetails from "./preview/EducationDetails";
+import WorkExperience from "./preview/WorkExperience";
+import Skills from "./preview/Skills"; 
+import Projects from "./preview/Projects";
 
 const PreviewSection = () => {
-  
-  const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext);
+  const { resumeInfo } = useContext(ResumeInfoContext);
 
   return (
-    <div>
-      Preview Section
-        {/* Personal Details */}
-            <PersonalDetails  resumeInfo={resumeInfo}/>
-        {/* Education */}
+    <div
+      className="shadow-lg h-full p-7 border-t-[20px]"
+      style={{
+        borderColor: resumeInfo?.themeColor,
+      }}
+    >
+      {/* Personal Details */}
+      <PersonalDetails resumeInfo={resumeInfo} />
 
-        {/* Skills */}
+      {/* Education */}
+      <EducationDetails education={resumeInfo?.education} />
+      
+      {/* Work Experience */}
+      <WorkExperience workExperience={resumeInfo?.workExperience} />
 
-        {/* WorkExperience */}
+      {/* Skills */}
+      <Skills skills={resumeInfo?.skills} />
 
-        {/* Projects */}
-
+      {/* Projects */}
+      <Projects projects={resumeInfo?.projects} />
     </div>
-  )
-}
+  );
+};
 
-export default PreviewSection
+export default PreviewSection;

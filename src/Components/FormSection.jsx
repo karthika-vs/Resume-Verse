@@ -1,4 +1,5 @@
 import React from 'react'
+//import PersonalDetailFroms from './Forms/PersonalDetailForms'
 
 const FormSection = () => {
   return (
