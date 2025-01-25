@@ -12,29 +12,33 @@ const PersonalDetails = ({ resumeData }) => {
           {resumeData.address} | {resumeData.email} | {resumeData.phoneNo}
         </p>
         <div className="flex justify-center gap-4 mt-2">
-          <a
-            href={resumeData.linkedin}
-            className="text-blue-600 underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {resumeData.linkedin}
-          </a>
-          <a
-            href={resumeData.github}
-            className="text-blue-600 underline"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {resumeData.github}
-          </a>
+          {resumeData.linkedin && (
+            <a
+              href={resumeData.linkedin}
+              className="text-blue-600 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              LinkedIn
+            </a>
+          )}
+          {resumeData.github && (
+            <a
+              href={resumeData.github}
+              className="text-blue-600 underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+          )}
         </div>
       </header>
 
       {/* Education Section */}
       <section className="mt-6">
         <h2 className="text-xl font-bold border-b pb-2">Education</h2>
-        {resumeData.education.map((edu, index) => (
+        {resumeData.education?.map((edu, index) => (
           <div key={index} className="mt-2">
             <p className="font-semibold">{edu.instituteName}</p>
             <p>
@@ -47,7 +51,7 @@ const PersonalDetails = ({ resumeData }) => {
       {/* Work Experience Section */}
       <section className="mt-6">
         <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
-        {resumeData.workExperience.map((exp, index) => (
+        {resumeData.workExperience?.map((exp, index) => (
           <div key={index} className="mt-2">
             <p className="font-semibold">{exp.companyName}</p>
             <p>
@@ -56,6 +60,25 @@ const PersonalDetails = ({ resumeData }) => {
             <p className="text-gray-600">{exp.desc}</p>
           </div>
         ))}
+      </section>
+
+      {/* Skills Section */}
+      <section className="mt-6">
+        <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
+        {resumeData.skills?.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {resumeData.skills.map((skill, index) => (
+              <span
+                key={index}
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md text-sm font-medium"
+              >
+                {skill}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-600">No skills added yet.</p>
+        )}
       </section>
     </div>
   );

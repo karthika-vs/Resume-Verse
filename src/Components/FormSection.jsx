@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import GeneralInfoForm from "./Forms/GeneralInfoForm";
 import EducationForm from "./Forms/EducationForm";
-import WorkExperienceForm from "./Forms/WorkExperienceForm"; // Added WorkExperienceForm
+import WorkExperienceForm from "./Forms/WorkExperienceForm";
+import SkillsForm from "./Forms/SkillsForm"; // Import SkillsForm
 import PersonalDetails from "./preview/PersonalDetails";
 
 const FormSection = () => {
@@ -27,16 +28,11 @@ const FormSection = () => {
       {
         companyName: "",
         role: "",
-        duration:"",
+        duration: "",
         desc: "",
       },
     ],
-    skills: {
-      programmingLanguages: [],
-      frameworks: [],
-      tools: [],
-      databases: [],
-    },
+    skills: [],
     projects: [],
   });
 
@@ -55,37 +51,10 @@ const FormSection = () => {
     });
   };
 
-  const handleAddEducation = () => {
+  const handleSkillsUpdate = (updatedSkills) => {
     setResumeData((prev) => ({
       ...prev,
-      education: [
-        ...prev.education,
-        { instituteName: "", degree: "", percentage: "", duration: "" },
-      ],
-    }));
-  };
-
-  const handleRemoveEducation = (index) => {
-    setResumeData((prev) => ({
-      ...prev,
-      education: prev.education.filter((_, i) => i !== index),
-    }));
-  };
-
-  const handleAddWorkExperience = () => {
-    setResumeData((prev) => ({
-      ...prev,
-      workExperience: [
-        ...prev.workExperience,
-        { companyName: "", role: "", duration: "", desc: "" },
-      ],
-    }));
-  };
-
-  const handleRemoveWorkExperience = (index) => {
-    setResumeData((prev) => ({
-      ...prev,
-      workExperience: prev.workExperience.filter((_, i) => i !== index),
+      skills: updatedSkills,
     }));
   };
 
@@ -107,8 +76,6 @@ const FormSection = () => {
           <EducationForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}
-            handleAddEducation={handleAddEducation}
-            handleRemoveEducation={handleRemoveEducation}
             nextStep={nextStep}
             prevStep={prevStep}
           />
@@ -117,8 +84,14 @@ const FormSection = () => {
           <WorkExperienceForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}
-            handleAddWorkExperience={handleAddWorkExperience}
-            handleRemoveWorkExperience={handleRemoveWorkExperience}
+            nextStep={nextStep}
+            prevStep={prevStep}
+          />
+        )}
+        {step === 4 && (
+          <SkillsForm
+            skills={resumeData.skills}
+            handleSkillsUpdate={handleSkillsUpdate}
             nextStep={nextStep}
             prevStep={prevStep}
           />
