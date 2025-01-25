@@ -8,22 +8,14 @@ import dummy from '../data/dummy';
 
 const EditResume = () => {
  
-  const params = useParams();
-  console.log(params);
-  const [resumeInfo,setResumeInfo]=useState();
-  useEffect(()=>{
-    setResumeInfo(dummy);
-  },[])
-
+  
   return (
     <>
     <Header />
-    <ResumeInfoContext.Provider value={{resumeInfo,setResumeInfo}}>
     <div className='grid grid-cols-1 md:grid-cols-2 p-10 gap-10'>
       <FormSection />
-      <PreviewSection />
+      {/* <PreviewSection /> */}
     </div>
-    </ResumeInfoContext.Provider>
     </>
   )
 }

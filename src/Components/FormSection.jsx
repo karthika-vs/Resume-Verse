@@ -1,10 +1,10 @@
 import React from 'react'
-//import PersonalDetailFroms from './Forms/PersonalDetailForms'
+import PersonalDetailForms from './Forms/PersonalDetailForms'
 
 const FormSection = () => {
   return (
     <div>
-      Form section
+      <PersonalDetailForms />
     </div>
   )
 }
