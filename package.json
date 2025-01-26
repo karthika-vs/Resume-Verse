@@ -13,7 +13,6 @@
     "@clerk/clerk-react": "^5.22.6",
     "@radix-ui/react-dialog": "^1.1.5",
     "@tailwindcss/vite": "^4.0.0",
-<<<<<<< HEAD
     "axios": "^1.7.9",
     "docxtemplater": "^3.58.3",
     "dom-to-image": "^2.6.0",
@@ -21,11 +20,9 @@
     "file-server": "^2.2.1",
     "html-docx-js": "^0.1.0",
     "html2canvas": "^1.4.1",
-    "jspdf": "^2.5.2",
-=======
     "html2canvas-pro": "^1.5.8",
     "html2pdf.js": "^0.10.2",
->>>>>>> 7b684923f1ab32e341f217a71666bf92f8e9f8cd
+    "jspdf": "^2.5.2",
     "lucide-react": "^0.474.0",
     "pizzip": "^3.1.8",
     "react": "^18.3.1",
