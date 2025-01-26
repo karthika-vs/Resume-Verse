@@ -1,4 +1,7 @@
 import React from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 
 const EducationForm = ({
   resumeData,
@@ -7,8 +10,36 @@ const EducationForm = ({
   handleRemoveEducation,
   nextStep,
   prevStep,
-  saveForm
+  saveForm,
 }) => {
+  const { resumeId } = useParams();
+  const { user } = useUser(); // Fetch the user object from Clerk
+  const userId = user?.id; // Extract the userId from the Clerk user object
+
+  const handleSubmit = async () => {
+    if (!userId || !resumeId) {
+      console.error("User ID or Resume ID is missing.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:3000/user", {
+        userId,
+        resumeId,
+        education: resumeData.education,
+      });
+
+      if (response.status === 200 || response.status === 201) {
+        console.log("Education data successfully submitted:", response.data);
+        nextStep(); // Proceed to the next step if submission is successful
+      } else {
+        console.error("Unexpected response:", response);
+      }
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    }
+  };
+
   return (
     <div className="max-w-xl mx-auto mt-6">
       <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
@@ -16,8 +47,8 @@ const EducationForm = ({
 
         {resumeData.education.map((edu, index) => (
           <div key={index} className="mb-6 border border-gray-300 p-4 rounded-md">
-            <h3 className="font-bold text-lg text-gray-700">{` #${index + 1}`}</h3>
-            
+            <h3 className="font-bold text-lg text-gray-700">{`#${index + 1}`}</h3>
+
             {/* Institute Name and Degree in a Row */}
             <div className="flex gap-4 mb-2">
               <div className="flex-1">
@@ -115,7 +146,7 @@ const EducationForm = ({
             </button>
             <button
               type="button"
-              onClick={nextStep}
+              onClick={handleSubmit}
               className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
             >
               Next

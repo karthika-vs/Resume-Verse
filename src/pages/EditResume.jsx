@@ -6,8 +6,9 @@ import Header from '../Components/Header';
 import { ResumeInfoContext } from '../context/ResumeInfoContext';
 import dummy from '../data/dummy';
 
+
 const EditResume = () => {
- 
+  const {resumeId} = useParams();
   
   return (
     <>
