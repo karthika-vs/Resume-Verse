@@ -19,7 +19,7 @@ const PersonalDetails = ({ resumeData }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-             {resumeData.linkedin}
+              {resumeData.linkedin}
             </a>
           )}
           {resumeData.github && (
@@ -36,36 +36,40 @@ const PersonalDetails = ({ resumeData }) => {
       </header>
 
       {/* Education Section */}
-      <section className="mt-6">
-        <h2 className="text-xl font-bold border-b pb-2">Education</h2>
-        {resumeData.education?.map((edu, index) => (
-          <div key={index} className="mt-2">
-            <p className="font-semibold">{edu.instituteName}</p>
-            <p>
-              {edu.degree} | {edu.percentage} | {edu.duration}
-            </p>
-          </div>
-        ))}
-      </section>
+      {resumeData.education?.length > 0 && (
+        <section className="mt-6">
+          <h2 className="text-xl font-bold border-b pb-2">Education</h2>
+          {resumeData.education.map((edu, index) => (
+            <div key={index} className="mt-2">
+              <p className="font-semibold">{edu.instituteName}</p>
+              <p>
+                {edu.degree} | {edu.percentage} | {edu.duration}
+              </p>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Work Experience Section */}
-      <section className="mt-6">
-        <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
-        {resumeData.workExperience?.map((exp, index) => (
-          <div key={index} className="mt-2">
-            <p className="font-semibold">{exp.companyName}</p>
-            <p>
-              {exp.role} | Duration: {exp.duration}
-            </p>
-            <p className="text-gray-600">{exp.desc}</p>
-          </div>
-        ))}
-      </section>
+      {resumeData.workExperience?.some((exp) => exp.companyName || exp.role || exp.duration || exp.desc) && (
+        <section className="mt-6">
+          <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
+          {resumeData.workExperience.map((exp, index) => (
+            <div key={index} className="mt-2">
+              <p className="font-semibold">{exp.companyName}</p>
+              <p>
+                {exp.role} | Duration: {exp.duration}
+              </p>
+              <p className="text-gray-600">{exp.desc}</p>
+            </div>
+          ))}
+        </section>
+      )}
 
       {/* Skills Section */}
-      <section className="mt-6">
-        <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
-        {resumeData.skills?.length > 0 ? (
+      {resumeData.skills?.length > 0 && (
+        <section className="mt-6">
+          <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
           <div className="flex flex-wrap gap-2 mt-2">
             {resumeData.skills.map((skill, index) => (
               <span
@@ -76,21 +80,21 @@ const PersonalDetails = ({ resumeData }) => {
               </span>
             ))}
           </div>
-        ) : (
-          <p className="text-gray-600">No skills added yet.</p>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* Projects Section */}
-      <section className="mt-6">
-        <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
-        {resumeData.projects?.map((project, index) => (
-          <div key={index} className="mt-2">
-            <p className="font-semibold">{project.projectName}</p>
-            <p>{project.desc}</p>
-          </div>
-        ))}
-      </section>
+      {resumeData.projects?.some((project) => project.projectName || project.desc) && (
+        <section className="mt-6">
+          <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
+          {resumeData.projects.map((project, index) => (
+            <div key={index} className="mt-2">
+              <p className="font-semibold">{project.projectName}</p>
+              <p>{project.desc}</p>
+            </div>
+          ))}
+        </section>
+      )}
     </div>
   );
 };
