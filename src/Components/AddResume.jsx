@@ -4,11 +4,37 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useUser } from "@clerk/clerk-react";
 import { v4 as uuidv4 } from "uuid"; // Import UUID
 import { useNavigate } from "react-router-dom"; // Import useNavigate
+import axios from "axios"; // Import Axios
 
 const AddResume = () => {
   const [title, setTitle] = useState("");
   const { user } = useUser();
   const navigate = useNavigate(); // Initialize useNavigate
+
+  const handleCreateResume = () => {
+    // Generate a new resume ID
+    const resumeId = uuidv4();
+
+    // Prepare the data to be sent in the POST request
+    const data = {
+      userId: user?.id, // User ID from Clerk
+      resumeId, // Generated Resume ID
+      title, // The title entered by the user
+    };
+
+    // Make the POST request to the backend API
+    axios
+      .post("http://localhost:3000/user", data)
+      .then((response) => {
+        console.log("Resume created successfully:", response.data);
+
+        // Navigate to the edit page after successful creation
+        navigate(`/dashboard/resume/${resumeId}/edit`);
+      })
+      .catch((error) => {
+        console.error("Error creating resume:", error);
+      });
+  };
 
   return (
     <div>
@@ -61,17 +87,7 @@ const AddResume = () => {
                   }`}
                   onClick={() => {
                     if (title.trim()) {
-                      const data = {
-                        resumeId: uuidv4(), // Generate unique ID
-                        userId: user?.id,
-                        userEmail: user?.emailAddresses[0]?.emailAddress,
-                        userName: user?.fullName,
-                        title,
-                      };
-                      console.log("New Resume Created:", data);
-
-                      // Navigate to the edit page with the generated resumeId
-                      navigate(`/dashboard/resume/${data.resumeId}/edit`);
+                      handleCreateResume(); // Call the function to send the POST request
                     }
                   }}
                   disabled={!title.trim()} // Button is disabled if title is empty
