@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useUser } from "@clerk/clerk-react";
 
-const SkillsForm = ({ skills, handleSkillsUpdate, prevStep, nextStep }) => {
-  const [localSkills, setLocalSkills] = useState(skills || []);
+const SkillsForm = ({ skills = [], handleSkillsUpdate, prevStep, nextStep }) => {
+  const [localSkills, setLocalSkills] = useState([...skills]);
+  const { user } = useUser();
+  const userId = user?.id;
+  const { resumeId } = useParams();
 
-  // Only update the parent if there's an actual change in skills
+  // Sync the parent state only when localSkills is explicitly updated by the user
   useEffect(() => {
     if (JSON.stringify(localSkills) !== JSON.stringify(skills)) {
       handleSkillsUpdate(localSkills);
     }
-  }, [localSkills, skills, handleSkillsUpdate]);
+    // Only trigger on `localSkills` changes
+  }, [localSkills]);
 
   const handleSkillChange = (index, value) => {
     const updatedSkills = [...localSkills];
@@ -23,6 +30,31 @@ const SkillsForm = ({ skills, handleSkillsUpdate, prevStep, nextStep }) => {
   const handleRemoveSkill = (index) => {
     const updatedSkills = localSkills.filter((_, i) => i !== index);
     setLocalSkills(updatedSkills);
+  };
+
+  const saveSkills = async () => {
+    if (!userId || !resumeId) {
+      console.error("User ID or Resume ID is missing.");
+      return;
+    }
+
+    try {
+      const payload = {
+        userId,
+        resumeId,
+        skills: localSkills, // Send the array of skills
+      };
+
+      const response = await axios.post("http://localhost:3000/user", payload);
+      if (response.status === 200 || response.status === 201) {
+        console.log("Skills saved successfully:", response.data);
+        nextStep();
+      } else {
+        console.error("Unexpected response:", response);
+      }
+    } catch (error) {
+      console.error("Error saving skills:", error);
+    }
   };
 
   return (
@@ -66,13 +98,22 @@ const SkillsForm = ({ skills, handleSkillsUpdate, prevStep, nextStep }) => {
           >
             Previous
           </button>
-          <button
-            type="button"
-            onClick={nextStep}
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
-          >
-            Next
-          </button>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={saveSkills}
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none"
+            >
+              Save
+            </button>
+            <button
+              type="button"
+              onClick={saveSkills}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
