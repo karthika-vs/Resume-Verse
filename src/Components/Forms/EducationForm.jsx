@@ -52,7 +52,7 @@ const EducationForm = ({
             <div className="flex gap-4 mb-2">
               <div className="flex-1">
                 <label className="block text-sm font-medium text-gray-700 capitalize">
-                  Percentage:
+                  Percentage/Grade:
                 </label>
                 <input
                   type="text"

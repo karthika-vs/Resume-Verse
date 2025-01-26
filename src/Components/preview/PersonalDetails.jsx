@@ -19,7 +19,7 @@ const PersonalDetails = ({ resumeData }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              LinkedIn
+             {resumeData.linkedin}
             </a>
           )}
           {resumeData.github && (
@@ -29,7 +29,7 @@ const PersonalDetails = ({ resumeData }) => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              GitHub
+              {resumeData.github}
             </a>
           )}
         </div>
@@ -42,7 +42,7 @@ const PersonalDetails = ({ resumeData }) => {
           <div key={index} className="mt-2">
             <p className="font-semibold">{edu.instituteName}</p>
             <p>
-              {edu.degree} | {edu.percentage}% | {edu.duration}
+              {edu.degree} | {edu.percentage} | {edu.duration}
             </p>
           </div>
         ))}
@@ -66,7 +66,7 @@ const PersonalDetails = ({ resumeData }) => {
       <section className="mt-6">
         <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
         {resumeData.skills?.length > 0 ? (
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 mt-2">
             {resumeData.skills.map((skill, index) => (
               <span
                 key={index}
@@ -79,6 +79,17 @@ const PersonalDetails = ({ resumeData }) => {
         ) : (
           <p className="text-gray-600">No skills added yet.</p>
         )}
+      </section>
+
+      {/* Projects Section */}
+      <section className="mt-6">
+        <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
+        {resumeData.projects?.map((project, index) => (
+          <div key={index} className="mt-2">
+            <p className="font-semibold">{project.projectName}</p>
+            <p>{project.desc}</p>
+          </div>
+        ))}
       </section>
     </div>
   );

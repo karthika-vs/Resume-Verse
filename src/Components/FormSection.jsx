@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import GeneralInfoForm from "./Forms/GeneralInfoForm";
 import EducationForm from "./Forms/EducationForm";
 import WorkExperienceForm from "./Forms/WorkExperienceForm";
-import SkillsForm from "./Forms/SkillsForm"; // Import SkillsForm
+import SkillsForm from "./Forms/SkillsForm";
+import ProjectsForm from "./Forms/ProjectsForm";
 import PersonalDetails from "./preview/PersonalDetails";
 
 const FormSection = () => {
@@ -33,7 +34,12 @@ const FormSection = () => {
       },
     ],
     skills: [],
-    projects: [],
+    projects: [
+      {
+        projectName: "",
+        desc: "",
+      },
+    ],
   });
 
   const handleInputChange = (key, value) => {
@@ -46,8 +52,59 @@ const FormSection = () => {
   const handleArrayChange = (section, index, key, value) => {
     setResumeData((prev) => {
       const updatedArray = [...prev[section]];
-      updatedArray[index][key] = value;
+
+      if (index !== null && key !== null) {
+        updatedArray[index][key] = value; // Update specific project or field
+      } else {
+        // If adding a new project, simply push the new value
+        updatedArray.push(value);
+      }
+
       return { ...prev, [section]: updatedArray };
+    });
+  };
+
+  const handleAddEducation = () => {
+    setResumeData((prev) => ({
+      ...prev,
+      education: [
+        ...prev.education,
+        {
+          instituteName: "",
+          degree: "",
+          percentage: "",
+          duration: "",
+        },
+      ],
+    }));
+  };
+
+  const handleRemoveEducation = (index) => {
+    setResumeData((prev) => {
+      const updatedEducation = prev.education.filter((_, i) => i !== index);
+      return { ...prev, education: updatedEducation };
+    });
+  };
+
+  const handleAddWorkExperience = () => {
+    setResumeData((prev) => ({
+      ...prev,
+      workExperience: [
+        ...prev.workExperience,
+        {
+          companyName: "",
+          role: "",
+          duration: "",
+          desc: "",
+        },
+      ],
+    }));
+  };
+
+  const handleRemoveWorkExperience = (index) => {
+    setResumeData((prev) => {
+      const updatedWorkExperience = prev.workExperience.filter((_, i) => i !== index);
+      return { ...prev, workExperience: updatedWorkExperience };
     });
   };
 
@@ -76,6 +133,8 @@ const FormSection = () => {
           <EducationForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}
+            handleAddEducation={handleAddEducation}
+            handleRemoveEducation={handleRemoveEducation}
             nextStep={nextStep}
             prevStep={prevStep}
           />
@@ -84,6 +143,8 @@ const FormSection = () => {
           <WorkExperienceForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}
+            handleAddWorkExperience={handleAddWorkExperience}
+            handleRemoveWorkExperience={handleRemoveWorkExperience}
             nextStep={nextStep}
             prevStep={prevStep}
           />
@@ -92,6 +153,14 @@ const FormSection = () => {
           <SkillsForm
             skills={resumeData.skills}
             handleSkillsUpdate={handleSkillsUpdate}
+            nextStep={nextStep}
+            prevStep={prevStep}
+          />
+        )}
+        {step === 5 && (
+          <ProjectsForm
+            resumeData={resumeData}
+            handleArrayChange={handleArrayChange}
             nextStep={nextStep}
             prevStep={prevStep}
           />
