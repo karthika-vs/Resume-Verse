@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useRef} from "react";
+import html2canvas from "html2canvas-pro";
+import jsPDF from 'jspdf';
 import GeneralInfoForm from "./Forms/GeneralInfoForm";
 import EducationForm from "./Forms/EducationForm";
 import WorkExperienceForm from "./Forms/WorkExperienceForm";
@@ -8,6 +10,7 @@ import PersonalDetails from "./preview/PersonalDetails";
 
 const FormSection = () => {
   const [step, setStep] = useState(1);
+  const pdfRef = useRef(null);
   const [resumeData, setResumeData] = useState({
     firstName: "",
     lastName: "",
@@ -135,9 +138,28 @@ const FormSection = () => {
     }));
   };
 
-  const nextStep = () => setStep((prev) => prev + 1);
+  const nextStep = async () => {
+    if (step === 5) { 
+      await downloadPDF();
+    }
+    setStep((prev) => prev + 1);
+};
   const prevStep = () => setStep((prev) => prev - 1);
 
+  const downloadPDF = async () => {
+    const element = pdfRef.current;
+    if (element) {
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("portrait", "mm", "a4");
+
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
+      pdf.save("resume.pdf");
+    }
+  };
   return (
     <div className="flex w-full h-full">
       {/* Left: Form Section */}
@@ -190,7 +212,7 @@ const FormSection = () => {
       </div>
 
       {/* Right: Preview Section */}
-      <div className="w-1/2 p-6 bg-gray-50 mt-5">
+      <div ref={pdfRef} className="w-1/2 p-6 bg-gray-50 mt-5">
         <PersonalDetails resumeData={resumeData} />
       </div>
     </div>
