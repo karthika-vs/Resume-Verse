@@ -82,19 +82,6 @@ const PersonalDetails = ({ resumeData }) => {
           </div>
         </section>
       )}
-
-      {/* Projects Section */}
-      {resumeData.projects?.some((project) => project.projectName || project.desc) && (
-        <section className="mt-6">
-          <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
-          {resumeData.projects.map((project, index) => (
-            <div key={index} className="mt-2">
-              <p className="font-semibold">{project.projectName}</p>
-              <p>{project.desc}</p>
-            </div>
-          ))}
-        </section>
-      )}
     </div>
   );
 };

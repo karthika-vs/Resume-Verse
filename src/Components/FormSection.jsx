@@ -108,6 +108,26 @@ const FormSection = () => {
     });
   };
 
+  const handleAddProject = () => {
+    setResumeData((prev) => ({
+      ...prev,
+      projects: [
+        ...prev.projects,
+        {
+          projectName: "",
+          desc: "",
+        },
+      ],
+    }));
+  };
+
+  const handleRemoveProject = (index) => {
+    setResumeData((prev) => {
+      const updatedProjects = prev.projects.filter((_, i) => i !== index);
+      return { ...prev, projects: updatedProjects };
+    });
+  };
+
   const handleSkillsUpdate = (updatedSkills) => {
     setResumeData((prev) => ({
       ...prev,
@@ -161,6 +181,8 @@ const FormSection = () => {
           <ProjectsForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}
+            handleAddProject={handleAddProject}
+            handleRemoveProject={handleRemoveProject}
             nextStep={nextStep}
             prevStep={prevStep}
           />
