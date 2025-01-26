@@ -1,8 +1,12 @@
 import React from "react";
 
-const PersonalDetails = ({ resumeData }) => {
+const PersonalDetails = ({ resumeData, pdfMode }) => {
   return (
-    <div className="max-w-4xl w-full mx-auto p-8 bg-white shadow-lg rounded-lg">
+    <div
+      className={`max-w-4xl w-full mx-auto p-8 bg-white shadow-lg rounded-lg ${
+        pdfMode ? "bg-transparent shadow-none p-4" : ""
+      }`}
+    >
       {/* Header Section */}
       <header className="text-center">
         <h1 className="text-3xl font-bold">
@@ -42,24 +46,20 @@ const PersonalDetails = ({ resumeData }) => {
           {resumeData.education.map((edu, index) => (
             <div key={index} className="mt-2">
               <p className="font-semibold">{edu.instituteName}</p>
-              <p>
-                {edu.degree} | {edu.percentage} | {edu.duration}
-              </p>
+              <p>{edu.degree} | {edu.percentage} | {edu.duration}</p>
             </div>
           ))}
         </section>
       )}
 
       {/* Work Experience Section */}
-      {resumeData.workExperience?.some((exp) => exp.companyName || exp.role || exp.duration || exp.desc) && (
+      {resumeData.workExperience?.some(exp => exp.companyName) && (
         <section className="mt-6">
           <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
           {resumeData.workExperience.map((exp, index) => (
             <div key={index} className="mt-2">
               <p className="font-semibold">{exp.companyName}</p>
-              <p>
-                {exp.role} | Duration: {exp.duration}
-              </p>
+              <p>{exp.role} | Duration: {exp.duration}</p>
               <p className="text-gray-600">{exp.desc}</p>
             </div>
           ))}
@@ -80,6 +80,19 @@ const PersonalDetails = ({ resumeData }) => {
               </span>
             ))}
           </div>
+        </section>
+      )}
+
+      {/* Projects Section */}
+      {resumeData.projects?.length > 0 && (
+        <section className="mt-6">
+          <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
+          {resumeData.projects.map((project, index) => (
+            <div key={index} className="mt-2">
+              <p className="font-semibold">{project.projectName}</p>
+              <p>{project.desc}</p>
+            </div>
+          ))}
         </section>
       )}
     </div>

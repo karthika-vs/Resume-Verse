@@ -3,9 +3,12 @@ import React, { useState, useEffect } from "react";
 const SkillsForm = ({ skills, handleSkillsUpdate, prevStep, nextStep }) => {
   const [localSkills, setLocalSkills] = useState(skills || []);
 
+  // Only update the parent if there's an actual change in skills
   useEffect(() => {
-    handleSkillsUpdate(localSkills);
-  }, [localSkills, handleSkillsUpdate]);
+    if (JSON.stringify(localSkills) !== JSON.stringify(skills)) {
+      handleSkillsUpdate(localSkills);
+    }
+  }, [localSkills, skills, handleSkillsUpdate]);
 
   const handleSkillChange = (index, value) => {
     const updatedSkills = [...localSkills];
