@@ -18,7 +18,7 @@ const Dashboard = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:3000/user/${userId}`);
+        const response = await axios.get(`https://resumeverse-backend.onrender.com/user/${userId}`);
         if (response.status === 200) {
           setResumes(response.data); // Update state with fetched resumes
         } else {

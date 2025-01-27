@@ -45,7 +45,7 @@ const SkillsForm = ({ skills = [], handleSkillsUpdate, prevStep, nextStep }) => 
         skills: localSkills, // Send the array of skills
       };
 
-      const response = await axios.post("http://localhost:3000/user", payload);
+      const response = await axios.post("https://resumeverse-backend.onrender.com/user", payload);
       if (response.status === 200 || response.status === 201) {
         console.log("Skills saved successfully:", response.data);
         nextStep();

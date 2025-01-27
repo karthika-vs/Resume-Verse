@@ -1,9 +1,12 @@
 import React from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ resumeId, title }) => {
+  navigate = useNavigate();
   const handleCardClick = () => {
     console.log(`Resume ID: ${resumeId}`);
+    navigate(`/dashboard/resume/${resumeId}/edit`);
   };
 
   return (

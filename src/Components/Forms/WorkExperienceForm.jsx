@@ -23,7 +23,7 @@
       }
 
       try {
-        const response = await axios.post("http://localhost:3000/user", {
+        const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
           userId,
           resumeId,
           workExperience: resumeData.workExperience,
