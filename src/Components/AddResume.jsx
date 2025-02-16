@@ -24,7 +24,8 @@ const AddResume = () => {
 
     // Make the POST request to the backend API
     axios
-      .post("https://resumeverse-backend.onrender.com/user", data)
+      // .post("https://resumeverse-backend.onrender.com/user", data)
+      .post("http://localhost:3000/user", data)
       .then((response) => {
         console.log("Resume created successfully:", response.data);
         navigate(`/dashboard/resume/${resumeId}/edit`);

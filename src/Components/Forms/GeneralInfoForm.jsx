@@ -15,12 +15,16 @@ const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) 
     }
 
     try {
-      const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
+      // const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
+      //   userId,
+      //   resumeId,
+      //   ...resumeData,
+      // });
+      const response = await axios.post("http://localhost:3000/user", {
         userId,
         resumeId,
         ...resumeData,
       });
-
       if (response.status === 200 || response.status === 201) {
         console.log("Data successfully submitted:", response.data);
         nextStep(); // Proceed to the next step if submission is successful

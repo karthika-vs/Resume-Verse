@@ -1,8 +1,12 @@
 // projectsForm.jsx
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import { chatSession } from "../../Services/AiModal";
+
+
+const prompt = " Project Title:{projectTitle}.Technology used: {technoUsed}. Based on this give a description paragraph not points for this project in 3 lines that needs to be added in a resume.";
 
 const ProjectsForm = ({
   resumeData,
@@ -16,6 +20,20 @@ const ProjectsForm = ({
     const { resumeId } = useParams();
     const { user } = useUser(); // Fetch the user object from Clerk
     const userId = user?.id; 
+
+    const [showTech , setShowTech] = useState(false);
+    const [techUsed , setTechUsed] = useState("");
+  
+    const generateDescriptionFromAI = async(project,index) => {
+      
+      const PROMPT = prompt.replace('{projectTitle}',project.projectName);
+      const FinPrompt = PROMPT.replace('{technoUsed}',techUsed);
+      const result = await chatSession.sendMessage(FinPrompt);
+      const resultText = await result.response.text();
+      console.log(result.response.text());
+      handleArrayChange("projects",index,"desc",resultText);
+    }
+
     const handleSubmit = async () => {
       if (!userId || !resumeId) {
         console.error("User ID or Resume ID is missing.");
@@ -23,7 +41,13 @@ const ProjectsForm = ({
       }
 
       try {
-        const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
+        // const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
+        //   userId,
+        //   resumeId,
+        //   projects: resumeData.projects,
+        // });
+
+        const response = await axios.post("http://localhost:3000/user", {
           userId,
           resumeId,
           projects: resumeData.projects,
@@ -45,7 +69,8 @@ const ProjectsForm = ({
       <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Projects</h2>
 
-        {resumeData.projects.map((project, index) => (
+        {resumeData.projects.map((project, index) => {
+        return(
           <div
             key={index}
             className="mb-6 p-4 rounded-md border border-gray-300 shadow-sm bg-white"
@@ -72,8 +97,36 @@ const ProjectsForm = ({
               <label className="block text-sm font-medium text-gray-700 capitalize">
                 Description:
               </label>
+              <div className="text-right">
+                <button type="button" 
+                        className="bg-purple-500 text-white px-1 py-1 rounded-md mt-1 hover:bg-purple-600 "
+                        onClick={() => setShowTech(true)}
+                        >Generate from ai</button>
+              </div>
+              
+              {showTech && (
+                <div className="mb-2">
+                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                    Technologies used:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder = "Eg: React,NestJs,MongoDB, "
+                    onChange={(e) => setTechUsed(e.target.value)}
+                    className="w-3/4 border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+                  />
+                  <button type ="button"
+                          className="ml-6 bg-purple-500 text-white px-6 py-1 rounded-md mt-1 hover:bg-purple-600 "
+                          onClick={()=> generateDescriptionFromAI(project,index)}
+                          >
+                            Submit
+                  </button>
+                </div>
+              )
+              }
+
               <textarea
-                value={project.desc}
+                value={project.desc || ""}
                 onChange={(e) =>
                   handleArrayChange("projects", index, "desc", e.target.value)
                 }
@@ -90,7 +143,7 @@ const ProjectsForm = ({
               Remove
             </button>
           </div>
-        ))}
+        )})}
 
         <button
           type="button"
