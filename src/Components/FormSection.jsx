@@ -192,7 +192,7 @@ const FormSection = () => {
   };
 
   const nextStep = async () => {
-    if (step === 5) { 
+    if (step === 6) { 
       await downloadPDF();
     }
     setStep((prev) => prev + 1);
@@ -253,6 +253,16 @@ const FormSection = () => {
           />
         )}
         {step === 5 && (
+          <ProjectsForm
+            resumeData={resumeData}
+            handleArrayChange={handleArrayChange}
+            handleAddProject={handleAddProject}
+            handleRemoveProject={handleRemoveProject}
+            nextStep={nextStep}
+            prevStep={prevStep}
+          />
+        )}
+        {step === 6 && (
           <ProjectsForm
             resumeData={resumeData}
             handleArrayChange={handleArrayChange}

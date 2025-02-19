@@ -39,7 +39,6 @@ const ProjectsForm = ({
         console.error("User ID or Resume ID is missing.");
         return;
       }
-
       try {
         // const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
         //   userId,
@@ -164,7 +163,7 @@ const ProjectsForm = ({
           <div className="flex gap-2">
             <button
               type="button"
-              onClick={saveForm}
+              onClick={handleSubmit}
               className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400"
             >
               Save
