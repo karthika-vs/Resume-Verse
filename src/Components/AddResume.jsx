@@ -12,17 +12,12 @@ const AddResume = () => {
   const navigate = useNavigate(); // Initialize useNavigate
 
   const handleCreateResume = () => {
-    // Generate a new resume ID
     const resumeId = uuidv4();
-
-    // Prepare the data to be sent in the POST request
     const data = {
       userId: user?.id, // User ID from Clerk
       resumeId, // Generated Resume ID
       title, // The title entered by the user
     };
-
-    // Make the POST request to the backend API
     axios
       // .post("https://resumeverse-backend.onrender.com/user", data)
       .post("http://localhost:3000/user", data)

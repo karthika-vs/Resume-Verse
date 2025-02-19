@@ -7,10 +7,63 @@ import WorkExperienceForm from "./Forms/WorkExperienceForm";
 import SkillsForm from "./Forms/SkillsForm";
 import ProjectsForm from "./Forms/ProjectsForm";
 import PersonalDetails from "./preview/PersonalDetails";
+import {useParams} from "react-router-dom";
+import {useUser} from "@clerk/clerk-react";
+import {useEffect} from "react";
+import axios from "axios";
 
 const FormSection = () => {
   const [step, setStep] = useState(1);
   const pdfRef = useRef(null);
+  const {resumeId} = useParams();
+  const {user} = useUser();
+  const userId = user?.id;
+  const [resumes, setResumes] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if(!resumeId){
+        console.error("Resume id is missing");
+        return;
+      }
+      if(!userId){
+        console.error("User id is missing");
+      }
+      try {
+        const response = await axios.get(`http://localhost:3000/user/${userId}/${resumeId}`);
+        if(response.status === 200){
+          setResumes(response.data);
+
+          if(response.data.length > 0){
+            const resume = response.data[0];
+            setResumeData(prev => ({
+              ...prev,
+              firstName: resume.firstName || "",
+              lastName: resume.lastName || "",
+              address: resume.address || "",
+              email: resume.email || "",
+              phoneNo: resume.phoneNo || "",
+              linkedin: resume.linkedin || "",
+              github: resume.github || "",
+              jobTitle: resume.title || "",
+              education: resume.education || [],
+              workExperience: resume.workExperience || [],
+              skills: resume.skills || [],
+              projects: resume.projects || [],
+            }));
+          }
+        }
+        else{
+          console.error("Unexpected response:", response);
+        }
+      } catch (err) {
+          console.error("Error fetching resume data", err);
+      }
+    };
+
+    fetchData();
+  },[resumeId, userId]);
+
   const [resumeData, setResumeData] = useState({
     firstName: "",
     lastName: "",
