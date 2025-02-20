@@ -30,7 +30,7 @@ const FormSection = () => {
         console.error("User id is missing");
       }
       try {
-        const response = await axios.get(`http://resumeverse-backend.onrender.com/user/${userId}/${resumeId}`);
+        const response = await axios.get(`https://resumeverse-backend.onrender.com/user/${userId}/${resumeId}`);
         // const response = await axios.get(`http://localhost:3000/user/${userId}/${resumeId}`);
         if(response.status === 200){
           setResumes(response.data);
