@@ -3,7 +3,7 @@ import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 import Header from "../Components/Header";
 import AddResume from "../Components/AddResume";
-import Card from "../Components/card";
+import Card from "../Components/Card";
 
 const Dashboard = () => {
   const { user } = useUser(); // Fetch the user object from Clerk
