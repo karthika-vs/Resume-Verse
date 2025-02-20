@@ -23,16 +23,16 @@
       }
 
       try {
-        // const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
-        //   userId,
-        //   resumeId,
-        //   workExperience: resumeData.workExperience,
-        // });
-        const response = await axios.post("http://localhost:3000/user", {
+        const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
           userId,
           resumeId,
           workExperience: resumeData.workExperience,
         });
+        // const response = await axios.post("http://localhost:3000/user", {
+        //   userId,
+        //   resumeId,
+        //   workExperience: resumeData.workExperience,
+        // });
 
         if (response.status === 200 || response.status === 201) {
           console.log("Work experience data successfully submitted:", response.data);

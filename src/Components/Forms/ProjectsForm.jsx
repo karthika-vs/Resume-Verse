@@ -40,17 +40,17 @@ const ProjectsForm = ({
         return;
       }
       try {
-        // const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
-        //   userId,
-        //   resumeId,
-        //   projects: resumeData.projects,
-        // });
-
-        const response = await axios.post("http://localhost:3000/user", {
+        const response = await axios.post("https://resumeverse-backend.onrender.com/user", {
           userId,
           resumeId,
           projects: resumeData.projects,
         });
+
+        // const response = await axios.post("http://localhost:3000/user", {
+        //   userId,
+        //   resumeId,
+        //   projects: resumeData.projects,
+        // });
 
         if (response.status === 200 || response.status === 201) {
           console.log("Projects data successfully submitted:", response.data);

@@ -19,8 +19,8 @@ const AddResume = () => {
       title, // The title entered by the user
     };
     axios
-      // .post("https://resumeverse-backend.onrender.com/user", data)
-      .post("http://localhost:3000/user", data)
+       .post("https://resumeverse-backend.onrender.com/user", data)
+      //.post("http://localhost:3000/user", data)
       .then((response) => {
         console.log("Resume created successfully:", response.data);
         navigate(`/dashboard/resume/${resumeId}/edit`);
