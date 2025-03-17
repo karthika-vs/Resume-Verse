@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import Header from './Components/Header'
-import Home from './pages/Home'
 import {useUser} from '@clerk/clerk-react'
 import {Navigate,Outlet} from 'react-router-dom'
 
