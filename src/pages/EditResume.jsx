@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useParams} from 'react-router-dom'
 import FormSection from '../Components/FormSection';
-import PreviewSection from '../Components/PreviewSection';
 import Header from '../Components/Header';
 import { ResumeInfoContext } from '../context/ResumeInfoContext';
 import dummy from '../data/dummy';

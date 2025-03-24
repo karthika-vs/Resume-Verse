@@ -6,7 +6,6 @@ import EducationForm from "./Forms/EducationForm";
 import WorkExperienceForm from "./Forms/WorkExperienceForm";
 import SkillsForm from "./Forms/SkillsForm";
 import ProjectsForm from "./Forms/ProjectsForm";
-import PersonalDetails from "./preview/PersonalDetails";
 import {useParams} from "react-router-dom";
 import {useUser} from "@clerk/clerk-react";
 import {useEffect} from "react";
