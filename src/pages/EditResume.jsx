@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import {useParams} from 'react-router-dom'
+import React from 'react'
 import FormSection from '../Components/FormSection';
 import Header from '../Components/Header';
-import { ResumeInfoContext } from '../context/ResumeInfoContext';
-import dummy from '../data/dummy';
+
 
 
 const EditResume = () => {
-  const {resumeId} = useParams();
-  
   return (
     <>
     <Header />
