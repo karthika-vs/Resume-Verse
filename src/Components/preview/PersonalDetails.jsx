@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const PersonalDetails = ({ resumeData }) => {
   return (
@@ -102,5 +103,41 @@ const PersonalDetails = ({ resumeData }) => {
     </div>
   );
 };
+
+
+PersonalDetails.propTypes = {
+    resumeData: PropTypes.shape({
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      address: PropTypes.string,
+      email: PropTypes.string,
+      phoneNo: PropTypes.string,
+      linkedin: PropTypes.string,
+      github: PropTypes.string,
+      education: PropTypes.arrayOf(
+        PropTypes.shape({
+          instituteName: PropTypes.string,
+          degree: PropTypes.string,
+          percentage: PropTypes.string,
+          duration: PropTypes.string,
+        })
+      ),
+      workExperience: PropTypes.arrayOf(
+        PropTypes.shape({
+          companyName: PropTypes.string,
+          role: PropTypes.string,
+          duration: PropTypes.string,
+          desc: PropTypes.string,
+        })
+      ),
+      skills: PropTypes.arrayOf(PropTypes.string),
+      projects: PropTypes.arrayOf(
+        PropTypes.shape({
+          projectName: PropTypes.string,
+          desc: PropTypes.string,
+        })
+      ),
+    }),
+  };
 
 export default PersonalDetails;

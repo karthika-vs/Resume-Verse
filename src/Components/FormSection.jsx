@@ -17,7 +17,7 @@ const FormSection = () => {
   const {resumeId} = useParams();
   const {user} = useUser();
   const userId = user?.id;
-  const [resumes, setResumes] = useState([]);
+  const [resumes,setResumes] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +30,7 @@ const FormSection = () => {
       }
       try {
         const response = await axios.get(`https://resumeverse-backend.onrender.com/user/${userId}/${resumeId}`);
+
         if(response.status === 200){
           setResumes(response.data);
 
@@ -109,8 +110,9 @@ const FormSection = () => {
       const updatedArray = [...prev[section]];
 
       if (index !== null && key !== null) {
-        updatedArray[index][key] = value; 
+        updatedArray[index][key] = value; // Update specific project or field
       } else {
+        // If adding a new project, simply push the new value
         updatedArray.push(value);
       }
 
