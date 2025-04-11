@@ -1,10 +1,9 @@
-// projectsForm.jsx
 import React, { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { chatSession } from "../../Services/AiModal";
-
+import PropTypes from "prop-types";
 
 const prompt = " Project Title:{projectTitle}.Technology used: {technoUsed}. Based on this give a description paragraph not points for this project in 3 lines that needs to be added in a resume.";
 
@@ -173,6 +172,23 @@ const ProjectsForm = ({
       </div>
     </div>
   );
+};
+
+ProjectsForm.propTypes = {
+  resumeData: PropTypes.shape({
+    projects: PropTypes.arrayOf(
+      PropTypes.shape({
+        projectName: PropTypes.string,
+        desc: PropTypes.string,
+      })
+    ),
+  }),
+  handleArrayChange: PropTypes.func,
+  handleAddProject: PropTypes.func,
+  handleRemoveProject: PropTypes.func,
+  nextStep: PropTypes.func,
+  prevStep: PropTypes.func,
+  saveForm: PropTypes.func,
 };
 
 export default ProjectsForm;

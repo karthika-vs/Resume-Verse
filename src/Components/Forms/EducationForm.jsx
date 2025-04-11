@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import PropTypes from "prop-types";
 
 const EducationForm = ({
   resumeData,
@@ -13,8 +14,8 @@ const EducationForm = ({
   saveForm,
 }) => {
   const { resumeId } = useParams();
-  const { user } = useUser(); // Fetch the user object from Clerk
-  const userId = user?.id; // Extract the userId from the Clerk user object
+  const { user } = useUser(); 
+  const userId = user?.id; 
 
   const handleSubmit = async () => {
     if (!userId || !resumeId) {
@@ -156,6 +157,25 @@ const EducationForm = ({
       </div>
     </div>
   );
+};
+
+EducationForm.propTypes = {
+  resumeData: PropTypes.shape({
+    education: PropTypes.arrayOf(
+      PropTypes.shape({
+        instituteName: PropTypes.string,
+        degree: PropTypes.string,
+        percentage: PropTypes.string,
+        duration: PropTypes.string,
+      })
+    ),
+  }),
+  handleArrayChange: PropTypes.func,
+  handleAddEducation: PropTypes.func,
+  handleRemoveEducation: PropTypes.func,
+  nextStep: PropTypes.func,
+  prevStep: PropTypes.func,
+  saveForm: PropTypes.func,
 };
 
 export default EducationForm;

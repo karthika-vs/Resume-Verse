@@ -2,6 +2,7 @@
   import axios from "axios";
   import { useParams } from "react-router-dom";
   import { useUser } from "@clerk/clerk-react";
+  import PropTypes from "prop-types";
 
   const WorkExperienceForm = ({
     resumeData,
@@ -159,4 +160,22 @@
     );
   };
 
+  WorkExperienceForm.propTypes = {
+    resumeData: PropTypes.shape({
+      workExperience: PropTypes.arrayOf(
+        PropTypes.shape({
+          companyName: PropTypes.string,
+          role: PropTypes.string,
+          duration: PropTypes.string,
+          desc: PropTypes.string,
+        })
+      ),
+    }),
+    handleArrayChange: PropTypes.func,
+    handleAddWorkExperience: PropTypes.func,
+    handleRemoveWorkExperience: PropTypes.func,
+    nextStep: PropTypes.func,
+    prevStep: PropTypes.func,
+    saveForm: PropTypes.func,
+  };
   export default WorkExperienceForm;
