@@ -5,7 +5,14 @@
   import PropTypes from "prop-types";
 
   const WorkExperienceForm = ({
-    resumeData,
+    resumeData = {
+      workExperience: [{
+        companyName: '',
+        role: '',
+        duration: '',
+        desc: ''
+      }]
+    },
     handleArrayChange,
     handleAddWorkExperience,
     handleRemoveWorkExperience,
@@ -55,12 +62,13 @@
               {/* Company Name and Role in a row */}
               <div className="flex gap-4 mb-2">
                 <div className="flex-1">
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                  <label htmlFor={`company-name-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                     Company Name:
                   </label>
                   <input
+                    id={`company-name-${index}`}
                     type="text"
-                    value={exp.companyName}
+                    value={exp.companyName || ''}
                     onChange={(e) =>
                       handleArrayChange("workExperience", index, "companyName", e.target.value)
                     }
@@ -68,12 +76,13 @@
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                  <label htmlFor={`role-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                     Role:
                   </label>
                   <input
+                    id={`role-${index}`}
                     type="text"
-                    value={exp.role}
+                    value={exp.role || ''}
                     onChange={(e) =>
                       handleArrayChange("workExperience", index, "role", e.target.value)
                     }
@@ -84,12 +93,13 @@
 
               {/* Duration */}
               <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label htmlFor={`duration-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                   Duration:
                 </label>
                 <input
+                  id={`duration-${index}`}
                   type="text"
-                  value={exp.duration}
+                  value={exp.duration || ''}
                   onChange={(e) =>
                     handleArrayChange("workExperience", index, "duration", e.target.value)
                   }
@@ -99,11 +109,12 @@
 
               {/* Description */}
               <div className="mb-2">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label htmlFor={`description-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                   Description:
                 </label>
                 <textarea
-                  value={exp.desc}
+                  id={`description-${index}`}
+                  value={exp.desc || ''}
                   onChange={(e) =>
                     handleArrayChange("workExperience", index, "desc", e.target.value)
                   }

@@ -53,7 +53,9 @@ const EducationForm = ({
             {/* Institute Name and Degree in a Row */}
             <div className="flex gap-4 mb-2">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label 
+                htmlFor={`institute-name-${index}`}
+                className="block text-sm font-medium text-gray-700 capitalize">
                   Institute Name:
                 </label>
                 <input
@@ -66,7 +68,9 @@ const EducationForm = ({
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label 
+                htmlFor={`degree-${index}`}
+                className="block text-sm font-medium text-gray-700 capitalize">
                   Degree:
                 </label>
                 <input
@@ -83,7 +87,9 @@ const EducationForm = ({
             {/* Percentage and Duration in a Row */}
             <div className="flex gap-4 mb-2">
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label 
+                htmlFor={`percentage-${index}`}
+                className="block text-sm font-medium text-gray-700 capitalize">
                   Percentage/Grade:
                 </label>
                 <input
@@ -96,7 +102,9 @@ const EducationForm = ({
                 />
               </div>
               <div className="flex-1">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
+                <label 
+                htmlFor={`duration-${index}`} 
+                className="block text-sm font-medium text-gray-700 capitalize">
                   Duration:
                 </label>
                 <input

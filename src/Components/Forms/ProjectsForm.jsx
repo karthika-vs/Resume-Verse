@@ -70,10 +70,11 @@ const ProjectsForm = ({
 
             {/* Project Name */}
             <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700 capitalize">
+              <label  htmlFor={`project-name-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                 Project Name:
               </label>
               <input
+                id={`project-name-${index}`}
                 type="text"
                 value={project.projectName}
                 onChange={(e) =>
@@ -85,7 +86,7 @@ const ProjectsForm = ({
 
             {/* Project Description */}
             <div className="mb-2">
-              <label className="block text-sm font-medium text-gray-700 capitalize">
+              <label htmlFor={`project-desc-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                 Description:
               </label>
               <div className="text-right">
@@ -97,10 +98,11 @@ const ProjectsForm = ({
               
               {showTech && (
                 <div className="mb-2">
-                  <label className="block text-sm font-medium text-gray-700 capitalize">
+                  <label htmlFor={`tech-used-${index}`} className="block text-sm font-medium text-gray-700 capitalize">
                     Technologies used:
                   </label>
                   <input
+                    id={`tech-used-${index}`}
                     type="text"
                     placeholder = "Eg: React,NestJs,MongoDB, "
                     onChange={(e) => setTechUsed(e.target.value)}
@@ -117,6 +119,7 @@ const ProjectsForm = ({
               }
 
               <textarea
+                id={`project-desc-${index}`}
                 value={project.desc || ""}
                 onChange={(e) =>
                   handleArrayChange("projects", index, "desc", e.target.value)
