@@ -18,7 +18,6 @@ const FormSection = () => {
   const {user} = useUser();
   const userId = user?.id;
   const [resumes,setResumes] = useState([]);
-
   useEffect(() => {
     const fetchData = async () => {
       if(!resumeId){
@@ -110,9 +109,8 @@ const FormSection = () => {
       const updatedArray = [...prev[section]];
 
       if (index !== null && key !== null) {
-        updatedArray[index][key] = value; // Update specific project or field
+        updatedArray[index][key] = value;
       } else {
-        // If adding a new project, simply push the new value
         updatedArray.push(value);
       }
 

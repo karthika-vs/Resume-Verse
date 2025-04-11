@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import PropTypes from "prop-types";
 
 const SkillsForm = ({ skills = [], handleSkillsUpdate, prevStep, nextStep }) => {
   const [localSkills, setLocalSkills] = useState([...skills]);
@@ -118,6 +119,13 @@ const SkillsForm = ({ skills = [], handleSkillsUpdate, prevStep, nextStep }) => 
       </div>
     </div>
   );
+};
+
+SkillsForm.propTypes = {
+  skills: PropTypes.arrayOf(PropTypes.string),
+  handleSkillsUpdate: PropTypes.func,
+  prevStep: PropTypes.func,
+  nextStep: PropTypes.func
 };
 
 export default SkillsForm;

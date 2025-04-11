@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import PropTypes from "prop-types";
 
 const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) => {
   const { resumeId } = useParams();
@@ -41,24 +42,24 @@ const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) 
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 capitalize">
               First Name:
-            </label>
             <input
               type="text"
               value={resumeData["firstName"]}
               onChange={(e) => handleInputChange("firstName", e.target.value)}
               className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
             />
+            </label>
           </div>
           <div className="flex-1">
             <label className="block text-sm font-medium text-gray-700 capitalize">
               Last Name:
-            </label>
             <input
               type="text"
               value={resumeData["lastName"]}
               onChange={(e) => handleInputChange("lastName", e.target.value)}
               className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
             />
+            </label>
           </div>
         </div>
 
@@ -97,6 +98,21 @@ const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) 
       </div>
     </div>
   );
+};
+
+GeneralInfoForm.propTypes = {
+  resumeData: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    address: PropTypes.string,
+    email: PropTypes.string,
+    phoneNo: PropTypes.string,
+    linkedin: PropTypes.string,
+    github: PropTypes.string,
+  }),
+  handleInputChange: PropTypes.func,
+  nextStep: PropTypes.func,
+  saveForm: PropTypes.func
 };
 
 export default GeneralInfoForm;
