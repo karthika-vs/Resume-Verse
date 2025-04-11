@@ -5,8 +5,8 @@ import { useUser } from "@clerk/clerk-react";
 
 const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) => {
   const { resumeId } = useParams();
-  const { user } = useUser(); // Fetch the user object from Clerk
-  const userId = user?.id; // Extract the userId from the Clerk user object
+  const { user } = useUser(); 
+  const userId = user?.id; 
 
   const handleSubmit = async () => {
     if (!userId || !resumeId) {
@@ -20,14 +20,9 @@ const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) 
         resumeId,
         ...resumeData,
       });
-      // const response = await axios.post("http://localhost:3000/user", {
-      //   userId,
-      //   resumeId,
-      //   ...resumeData,
-      // });
       if (response.status === 200 || response.status === 201) {
         console.log("Data successfully submitted:", response.data);
-        nextStep(); // Proceed to the next step if submission is successful
+        nextStep(); 
       } else {
         console.error("Unexpected response:", response);
       }

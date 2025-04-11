@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 import { ClerkProvider } from '@clerk/clerk-react';
-import { BrowserRouter, createBrowserRouter ,RouterProvider } from 'react-router-dom';
+import {createBrowserRouter ,RouterProvider } from 'react-router-dom';
 import Home from './pages/Home.jsx'
 import SignInPage from './auth/sign-in/index.jsx';
 import Dashboard from './pages/Dashboard.jsx';

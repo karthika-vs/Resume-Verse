@@ -28,12 +28,7 @@ const EducationForm = ({
         resumeId,
         education: resumeData.education,
       });
-      // const response = await axios.post("http://localhost:3000/user", {
-      //   userId,
-      //   resumeId,
-      //   education: resumeData.education,
-      // });
-
+      
       if (response.status === 200 || response.status === 201) {
         console.log("Education data successfully submitted:", response.data);
         nextStep(); // Proceed to the next step if submission is successful

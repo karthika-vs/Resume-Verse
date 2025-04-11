@@ -1,4 +1,4 @@
-import React, { useState,useRef} from "react";
+import React, { useState,useRef,useEffect} from "react";
 import html2canvas from "html2canvas-pro";
 import jsPDF from 'jspdf';
 import GeneralInfoForm from "./Forms/GeneralInfoForm";
@@ -8,7 +8,6 @@ import SkillsForm from "./Forms/SkillsForm";
 import ProjectsForm from "./Forms/ProjectsForm";
 import {useParams} from "react-router-dom";
 import {useUser} from "@clerk/clerk-react";
-import {useEffect} from "react";
 import axios from "axios";
 import PersonalDetails from "./preview/PersonalDetails";
 
@@ -31,7 +30,6 @@ const FormSection = () => {
       }
       try {
         const response = await axios.get(`https://resumeverse-backend.onrender.com/user/${userId}/${resumeId}`);
-        // const response = await axios.get(`http://localhost:3000/user/${userId}/${resumeId}`);
         if(response.status === 200){
           setResumes(response.data);
 
@@ -111,9 +109,8 @@ const FormSection = () => {
       const updatedArray = [...prev[section]];
 
       if (index !== null && key !== null) {
-        updatedArray[index][key] = value; // Update specific project or field
+        updatedArray[index][key] = value; 
       } else {
-        // If adding a new project, simply push the new value
         updatedArray.push(value);
       }
 
