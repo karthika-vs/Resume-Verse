@@ -39,67 +39,68 @@ const PersonalDetails = ({ resumeData }) => {
       {/* Education Section */}
       {resumeData.education?.length > 0 && (
         <section className="mt-6">
-          <h2 className="text-xl font-bold border-b pb-2">Education</h2>
-          {resumeData.education.map((edu, index) => (
-            <div key={index} className="mt-2">
-              <p className="font-semibold">{edu.instituteName}</p>
-              <p>
+            <h2 className="text-xl font-bold border-b pb-2">Education</h2>
+            {resumeData.education.map((edu) => (
+            <div key={`${edu.instituteName}-${edu.degree}`} className="mt-2">
+                <p className="font-semibold">{edu.instituteName}</p>
+                <p>
                 {edu.degree} | {edu.percentage} | {edu.duration}
-              </p>
+                </p>
             </div>
-          ))}
+            ))}
         </section>
-      )}
+        )}
 
       {/* Work Experience Section */}
       {resumeData.workExperience?.some(
         (exp) => exp.companyName || exp.role || exp.duration || exp.desc
-      ) && (
+        ) && (
         <section className="mt-6">
-          <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
-          {resumeData.workExperience.map((exp, index) => (
-            <div key={index} className="mt-2">
-              <p className="font-semibold">{exp.companyName}</p>
-              <p>
+            <h2 className="text-xl font-bold border-b pb-2">Work Experience</h2>
+            {resumeData.workExperience.map((exp) => (
+            <div key={`${exp.companyName}-${exp.role}`} className="mt-2">
+                <p className="font-semibold">{exp.companyName}</p>
+                <p>
                 {exp.role} | Duration: {exp.duration}
-              </p>
-              <p className="text-gray-600">{exp.desc}</p>
+                </p>
+                <p className="text-gray-600">{exp.desc}</p>
             </div>
-          ))}
+            ))}
         </section>
-      )}
+        )}
 
       {/* Skills Section */}
       {resumeData.skills?.length > 0 && (
         <section className="mt-6">
-          <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {resumeData.skills.map((skill, index) => (
-              <span
-                key={index}
+            <h2 className="text-xl font-bold border-b pb-2">Skills</h2>
+            <div className="flex flex-wrap gap-2 mt-2">
+            {resumeData.skills.map((skill) => (
+                <span
+                key={skill} // Using the skill itself as key since it should be unique
                 className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md text-sm font-medium"
-              >
+                >
                 {skill}
-              </span>
+                </span>
             ))}
-          </div>
+            </div>
         </section>
-      )}
+        )}
+
 
       {/* Projects Section */}
       {resumeData.projects?.some((proj) => proj.projectName || proj.desc) && (
         <section className="mt-6">
-          <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
-          {resumeData.projects.map((proj, index) => (
+            <h2 className="text-xl font-bold border-b pb-2">Projects</h2>
+            {resumeData.projects.map((proj) => (
             (proj.projectName || proj.desc) && (
-              <div key={index} className="mt-2">
+                <div key={proj.projectName || proj.desc} className="mt-2">
                 <p className="font-semibold">{proj.projectName}</p>
                 <p className="text-gray-600">{proj.desc}</p>
-              </div>
+                </div>
             )
-          ))}
+            ))}
         </section>
-      )}
+        )}
     </div>
   );
 };

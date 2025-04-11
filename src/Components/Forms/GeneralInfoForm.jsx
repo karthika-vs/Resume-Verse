@@ -38,30 +38,28 @@ const GeneralInfoForm = ({ resumeData, handleInputChange, nextStep, saveForm }) 
         <h2 className="text-2xl font-bold mb-4 text-gray-800">General Information</h2>
 
         {/* First Name and Last Name in a row */}
-        <div className="flex gap-4 mb-2">
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 capitalize">
-              First Name:
-              <input
-                type="text"
-                value={resumeData["firstName"]}
-                onChange={(e) => handleInputChange("firstName", e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </label>
-          </div>
-          <div className="flex-1">
-            <label className="block text-sm font-medium text-gray-700 capitalize">
-              Last Name:
-              <input
-                type="text"
-                value={resumeData["lastName"]}
-                onChange={(e) => handleInputChange("lastName", e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
-              />
-            </label>
-          </div>
-        </div>
+        <div className="flex-1">
+        <label className="block text-sm font-medium text-gray-700 capitalize">
+          First Name:
+          <input
+            type="text"
+            value={resumeData["firstName"]}
+            onChange={(e) => handleInputChange("firstName", e.target.value)}
+            className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </label>
+      </div>
+      <div className="flex-1">
+        <label className="block text-sm font-medium text-gray-700 capitalize">
+          Last Name:
+          <input
+            type="text"
+            value={resumeData["lastName"]}
+            onChange={(e) => handleInputChange("lastName", e.target.value)}
+            className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </label>
+      </div>
 
         {/* Remaining fields */}
         {["address", "email", "phoneNo", "linkedin", "github"].map((key) => (
