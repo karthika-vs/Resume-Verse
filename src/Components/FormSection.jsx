@@ -10,6 +10,7 @@ import {useParams} from "react-router-dom";
 import {useUser} from "@clerk/clerk-react";
 import {useEffect} from "react";
 import axios from "axios";
+import PersonalDetails from "./preview/PersonalDetails";
 
 const FormSection = () => {
   const [step, setStep] = useState(1);
@@ -273,11 +274,13 @@ const FormSection = () => {
           />
         )}
       </div>
-
+        
       {/* Right: Preview Section */}
       <div ref={pdfRef} className="w-1/2 p-6 bg-gray-50 mt-5">
         <PersonalDetails resumeData={resumeData} />
       </div>
+      
+      
     </div>
   );
 };
